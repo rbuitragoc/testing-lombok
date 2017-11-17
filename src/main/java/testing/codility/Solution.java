@@ -14,6 +14,17 @@ import java.util.stream.IntStream;
 public class Solution {
 
     public static void main(String ... args) {
+        for (int i = 0; i < 5; i++) {
+            harness();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void harness() {
         Solution s = new Solution();
         int[] inputManual = new int[]{400, 99900, 3, 16, -200, 5, 6, 7, 8, 9, 10, 4, 1, 2, -55, 7, 9};
         int[] input = s.generateRandomArray();
