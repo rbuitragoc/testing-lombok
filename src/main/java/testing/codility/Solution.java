@@ -1,6 +1,5 @@
 package testing.codility;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,6 +12,13 @@ import java.util.stream.IntStream;
  */
 public class Solution {
 
+    /**
+     * Find the smallest positive integer not present in a given integer (primitive) array.
+     * Solution must assume that:
+     * Array can have arbitrarily large size (N=100000). Array elements may range between -1M and 1M.
+     * The result integer can grow up to 1000000
+     * @param args
+     */
     public static void main(String ... args) {
         for (int i = 0; i < 5; i++) {
             harness();
@@ -27,7 +33,7 @@ public class Solution {
     public static void harness() {
         Solution s = new Solution();
         int[] inputManual = new int[]{400, 99900, 3, 16, -200, 5, 6, 7, 8, 9, 10, 4, 1, 2, -55, 7, 9};
-        int[] input = s.generateRandomArray();
+        int[] input = s.generateRandomPrimitiveIntArray();
         System.out.println(String.format("Random array generated: %s", Arrays.toString(input)));
         long start = System.currentTimeMillis();
         System.out.println(String.format("Getting solutionWithOn2: %s", s.solutionWithOn2(input)));
@@ -36,7 +42,7 @@ public class Solution {
         start = System.currentTimeMillis();
         System.out.println(String.format("Getting solution: %s", s.solution(input)));
         end = System.currentTimeMillis();
-        System.out.println(String.format("(Took: %s ms)", end-start));
+        System.out.println(String.format("(Took: %s ms)\n", end-start));
     }
 
     public int solutionThatFailsAtMinusOne(int[] a) {
@@ -81,8 +87,8 @@ public class Solution {
                 .getAsInt();
     }
 
-    public int[] generateRandomArray() {
-        int size = new Random().nextInt(2000);
+    public int[] generateRandomPrimitiveIntArray() {
+        int size = new Random().nextInt(300);
         final int min = -10;
         final int max = 500;
         int[] array = new int[size];
