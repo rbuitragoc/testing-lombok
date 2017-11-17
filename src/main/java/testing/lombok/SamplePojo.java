@@ -1,7 +1,4 @@
-// Copyright (c) 2017 Boomi, Inc.
-package testing.lombok;/**
- * Created by rick on 10/30/17.
- */
+package testing.lombok;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

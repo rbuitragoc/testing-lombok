@@ -1,7 +1,4 @@
 package testing.lombok;
-/**
- * Created by rick on 10/30/17.
- */
 
 import lombok.Cleanup;
 import lombok.NonNull;
