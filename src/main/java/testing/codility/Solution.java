@@ -71,7 +71,7 @@ public class Solution {
     }
 
     public int solutionWithOn2(int[] a) {
-        for (int i = 1; i < 100000; i++) {
+        for (int i = 1; i < 1000000; i++) {
             final int I = i;
             if (IntStream.of(a).noneMatch(x -> x == I)) {
                 return i;
@@ -81,7 +81,7 @@ public class Solution {
     }
 
     public int solution(int[] a) {
-        return (a.length == 0) ? 1 : IntStream.rangeClosed(1, 100000)
+        return (a.length == 0) ? 1 : IntStream.rangeClosed(1, 1000000)
                 .filter(i -> IntStream.of(a).noneMatch(x -> x == i))
                 .findFirst()
                 .getAsInt();
@@ -90,7 +90,7 @@ public class Solution {
     public int[] generateRandomPrimitiveIntArray() {
         int size = new Random().nextInt(300);
         final int min = -10;
-        final int max = 500;
+        final int max = 75;
         int[] array = new int[size];
         for (int i = 0; i < size; i++) {
             array[i] = ThreadLocalRandom.current().nextInt(min, max);
