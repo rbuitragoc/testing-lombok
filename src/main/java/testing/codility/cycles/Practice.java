@@ -13,7 +13,7 @@ public class Practice {
         System.out.println(String.format("Factorial of %s (%s!) using parallel streams: %s\n", input, input,
                 p.factorial(input)));
         System.out.println(String.format("Rectangle Triangle of base %s:%s", input, p.rectangleTriangle(input)));
-        System.out.println(String.format("Upside down Triangle of base %s: \n\n %s", input, p.upsideDownTriangle(input)));
+        System.out.println(String.format("Upside down Triangle of base %s: \n\n%s", input, p.upsideDownTriangle(input)));
 
     }
 
@@ -57,7 +57,7 @@ public class Practice {
             for (int s = 1; s <= (n - i); s++) {
                 buf.append("  ");
             }
-            for (int a = 1; a < 2 * (i); a++) {
+            for (int a = 1; a < 2 * i; a++) {
                 buf.append("* ");
             }
 
