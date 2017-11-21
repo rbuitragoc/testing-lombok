@@ -20,7 +20,7 @@ public class Solution {
      * @param args
      */
     public static void main(String ... args) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             harness();
             try {
                 Thread.sleep(1000);
@@ -41,6 +41,10 @@ public class Solution {
         System.out.println(String.format("(Took: %s ms)", end-start));
         start = System.currentTimeMillis();
         System.out.println(String.format("Getting solution: %s", s.solution(input)));
+        end = System.currentTimeMillis();
+        System.out.println(String.format("(Took: %s ms)\n", end-start));
+        start = System.currentTimeMillis();
+        System.out.println(String.format("Getting (parallel) solution: %s", s.solutionParallel(input)));
         end = System.currentTimeMillis();
         System.out.println(String.format("(Took: %s ms)\n", end-start));
     }
@@ -81,7 +85,21 @@ public class Solution {
     }
 
     public int solution(int[] a) {
+        if (a == null) {
+            return 0;
+        }
         return (a.length == 0) ? 1 : IntStream.rangeClosed(1, 1000000)
+                .filter(i -> IntStream.of(a).noneMatch(x -> x == i))
+                .findFirst()
+                .getAsInt();
+    }
+
+    public int solutionParallel(int[] a) {
+        if (a == null) {
+            return 0;
+        }
+        return (a.length == 0) ? 1 : IntStream.rangeClosed(1, 1000000)
+                .parallel()
                 .filter(i -> IntStream.of(a).noneMatch(x -> x == i))
                 .findFirst()
                 .getAsInt();
