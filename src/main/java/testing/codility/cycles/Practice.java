@@ -1,5 +1,7 @@
 package testing.codility.cycles;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 /**
@@ -9,12 +11,15 @@ public class Practice {
 
     public static void main(String ... args) {
         Practice p = new Practice();
-        int input = 4;
-        System.out.println(String.format("Factorial of %s (%s!) using parallel streams: %s\n", input, input,
-                p.factorial(input)));
+        int input = 10;
+        System.out.println(String.format("Factorial of %s (%s!) using parallel streams: %s\n",
+                input, input, p.factorial(input)));
         System.out.println(String.format("Rectangle Triangle of base %s:%s", input, p.rectangleTriangle(input)));
-        System.out.println(String.format("Upside down Triangle of base %s: \n\n%s", input, p.upsideDownTriangle(input)));
-
+        System.out.println(String.format("Upside down Triangle of %s levels: \n\n%s",
+                input, p.upsideDownTriangle(input)));
+        input *= 3;
+        System.out.println(String.format("Fibonacci sequence to the number lesser than %s: \n\n%s",
+                input, Arrays.toString(p.fibonacci(input))));
     }
 
     /**
@@ -54,7 +59,7 @@ public class Practice {
     private String upsideDownTriangle(int n) {
         StringBuilder buf = new StringBuilder();
         for (int i = n; i > 0; i--) {
-            for (int s = 1; s <= (n - i); s++) {
+            for (int s = 0; s < (n - i); s++) {
                 buf.append("  ");
             }
             for (int a = 1; a < 2 * i; a++) {
@@ -64,5 +69,27 @@ public class Practice {
             buf.append("\n");
         }
         return buf.toString();
+    }
+
+    /**
+     * Prints the fibonacci sequence for numbers smaller than n
+     * @param n the limit to the fibonacci sequence
+     * @return a sorted array where all elements are the integers of the fibonacci sequence up to n
+     */
+    private Integer[] fibonacci(int n) {
+        ArrayList<Integer> fib = new ArrayList<>();
+        int c = 1;
+        int b = 0;
+        int a = 0;
+
+        fib.add(0);
+
+        while (c < n) {
+            fib.add(c);
+            a = b;
+            b = c;
+            c = b + a;
+        }
+        return fib.toArray(new Integer[fib.size()]);
     }
 }
