@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * @author rick.
@@ -20,7 +21,7 @@ public class Solution {
      * @param args
      */
     public static void main(String ... args) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             harness();
             try {
                 Thread.sleep(1000);
@@ -42,9 +43,9 @@ public class Solution {
         start = System.currentTimeMillis();
         System.out.println(String.format("Getting solution: %s", s.solution(input)));
         end = System.currentTimeMillis();
-        System.out.println(String.format("(Took: %s ms)\n", end-start));
+        System.out.println(String.format("(Took: %s ms)", end-start));
         start = System.currentTimeMillis();
-        System.out.println(String.format("Getting (parallel) solution: %s", s.solutionParallel(input)));
+        System.out.println(String.format("Getting (parallel) solution: %s", s.parallelismSolution(input)));
         end = System.currentTimeMillis();
         System.out.println(String.format("(Took: %s ms)\n", end-start));
     }
@@ -85,21 +86,27 @@ public class Solution {
     }
 
     public int solution(int[] a) {
-        if (a == null) {
-            return 0;
-        }
-        return (a.length == 0) ? 1 : IntStream.rangeClosed(1, 1000000)
-                .filter(i -> IntStream.of(a).noneMatch(x -> x == i))
-                .findFirst()
-                .getAsInt();
+        return solution(a, false);
     }
 
-    public int solutionParallel(int[] a) {
+    public int parallelismSolution(int[] a) {
+        return solution(a, true);
+    }
+
+    public int solution(int[] a, boolean executeInParallel) {
         if (a == null) {
             return 0;
+        } else if (a.length == 0) {
+            return 1;
         }
-        return (a.length == 0) ? 1 : IntStream.rangeClosed(1, 1000000)
-                .parallel()
+
+        IntStream intStream = IntStream.rangeClosed(1, 100000);
+
+        if (executeInParallel) {
+            intStream = intStream.parallel();
+        }
+
+        return intStream
                 .filter(i -> IntStream.of(a).noneMatch(x -> x == i))
                 .findFirst()
                 .getAsInt();
