@@ -27,6 +27,7 @@ public class StreamsPractice extends ArrayHelper {
         s.negativeAirTemperature();
         int[] input = generateRandomPrimitiveIntArray(20, -60, 50);
         System.out.println(String.format("Reversed array (%s): %s", Arrays.toString(input), Arrays.toString(s.reverse(input))));
+        System.out.println(String.format("Generated random array with odd length and just one item unpaired: %s", Arrays.toString(generateOddLengthArrayWithUnpairedItem(10))));
     }
 
     public void synchronizedSetTest() {
