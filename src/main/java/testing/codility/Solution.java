@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 /**
  * @author rick.
  */
-public class Solution {
+public class Solution extends ArrayHelper {
 
     /**
      * Find the smallest positive integer not present in a given integer (primitive) array.
@@ -34,7 +34,7 @@ public class Solution {
     public static void harness() {
         Solution s = new Solution();
         int[] inputManual = new int[]{400, 99900, 3, 16, -200, 5, 6, 7, 8, 9, 10, 4, 1, 2, -55, 7, 9};
-        int[] input = s.generateRandomPrimitiveIntArray();
+        int[] input = generateRandomPrimitiveIntArray();
         System.out.println(String.format("Random array generated: %s", Arrays.toString(input)));
         long start = System.currentTimeMillis();
         System.out.println(String.format("Getting solutionWithOn2: %s", s.solutionWithOn2(input)));
@@ -110,17 +110,6 @@ public class Solution {
                 .filter(i -> IntStream.of(a).noneMatch(x -> x == i))
                 .findFirst()
                 .getAsInt();
-    }
-
-    public int[] generateRandomPrimitiveIntArray() {
-        int size = new Random().nextInt(300);
-        final int min = -10;
-        final int max = 75;
-        int[] array = new int[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = ThreadLocalRandom.current().nextInt(min, max);
-        }
-        return array;
     }
 
 }
