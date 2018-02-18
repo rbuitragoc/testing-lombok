@@ -9,7 +9,7 @@ import lombok.ToString;
  */
 @Data
 @NoArgsConstructor
-@ToString(callSuper = true, doNotUseGetters = true)
+@ToString(callSuper = false, doNotUseGetters = false)
 public class SamplePojo {
 
     private String field1;

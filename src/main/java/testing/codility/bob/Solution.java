@@ -25,9 +25,9 @@ public class Solution {
     static class Point2D {
         int x;
         int y;
-        public Point2D(int _x, int _y) {
-            x = _x;
-            y = _y;
+        public Point2D(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
 
