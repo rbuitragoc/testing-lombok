@@ -6,8 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Required;
-
 import java.util.Date;
 
 /**
