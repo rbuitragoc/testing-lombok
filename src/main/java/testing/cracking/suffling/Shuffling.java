@@ -7,6 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.apache.tomcat.util.http.fileupload.util.Streams;
 
 /**
  * Write a method to shuffle a deck of cards. It must be a perfect shuffle - in other words, each
@@ -39,31 +42,57 @@ public class Shuffling {
   }
   
   /**
-   * WIP. Works but has a problem: it reduces the set of cards returned.
+   * Complexity: 2 cycles. Space: 1 separate List.
    * @param deck
    * @return
    */
   public static List<Card> shuffleWithDeadCard(Deck deck) {
     List<Card> shuffled = new ArrayList<>(deck.getCards());
-    for (int i = 0; i < deck.getCards().size(); i++) {
-      int position = (int) (Math.random() * (deck.getCards().size() - i)) + i;
+    for (int i = 0; i < Deck.SIZE; i++) {
+      int position = ThreadLocalRandom.current().nextInt(i, Deck.SIZE);
       Card temp = deck.getCards().get(i);
-      deck.getCards().set(i, deck.getCards().get(position));
-      deck.getCards().set(position, temp);
+      Card nowDead = deck.getCards().get(position);
+      // swapping...
+      shuffled.add(i, nowDead);
+      shuffled.add(position, temp);
+    }
+    return shuffled.stream().distinct().collect(Collectors.toList());
+  }
+  
+  /**
+   * Complexity: ignoring the List to Array translation, just 1 cycle. Space: 1 structure (array)
+   * @param deck
+   * @return
+   */
+  public static String[] shuffleWithDeadCardUsingArrays(Deck deck) {
+    String[] shuffled = new String[Deck.SIZE];
+    deck.getCards().stream().map(c -> c.toString()).collect(Collectors.toList()).toArray(shuffled);
+    for (int i = 0; i < Deck.SIZE; i++) {
+      int position = ThreadLocalRandom.current().nextInt(i, Deck.SIZE);
+      String temp = shuffled[i];
+      String nowDead = shuffled[position];
+      shuffled[i] = nowDead;
+      shuffled[position] = temp;
     }
     return shuffled;
   }
 
   public static void main(String... strings) {
     Deck deck = new Deck(createDeck());
-    System.out.println(deck);
-    System.out.println(String.format("Got %s cards!", deck.getCards().size()));
+    System.out.println(deck.getCards());
+    System.out.println(String.format("- Got %s cards!", deck.getCards().size()));
+    
     Deck shuffled = Deck.builder().cards(shuffleWithBlindRandom(deck)).build();
-    System.out.println(shuffled);
-    System.out.println(String.format("Got %s cards with blind random!", shuffled.getCards().size()));
-    Deck shuffledWithDeadCard = Deck.builder().cards(shuffleWithBlindRandom(deck)).build();
-    System.out.println(shuffledWithDeadCard);
-    System.out.println(String.format("Got %s cards with dead card!", shuffledWithDeadCard.getCards().size()));
+    System.out.println(shuffled.getCards());
+    System.out.println(String.format("- Got %s cards with blind random!", shuffled.getCards().size()));
+    
+    Deck shuffledWithDeadCard = Deck.builder().cards(shuffleWithDeadCard(deck)).build();
+    System.out.println(shuffledWithDeadCard.getCards());
+    System.out.println(String.format("- Got %s cards with dead card!", shuffledWithDeadCard.getCards().size()));
+    
+    String[] shuffledWithDeadCardsArray = shuffleWithDeadCardUsingArrays(deck);
+    System.out.println(Arrays.toString(shuffledWithDeadCardsArray));
+    System.out.println(String.format("- Got %s cards with dead cards array!", shuffledWithDeadCardsArray.length));
   }
 
 }
