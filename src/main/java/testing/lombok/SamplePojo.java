@@ -1,5 +1,6 @@
 package testing.lombok;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import lombok.ToString;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(callSuper = false, doNotUseGetters = false)
 public class SamplePojo {
 
@@ -17,10 +19,4 @@ public class SamplePojo {
     private String field3;
     private Integer field4;
 
-    public SamplePojo(String s, String s1, String s2, int i) {
-        field1 = s;
-        field2 = s1;
-        field3 = s2;
-        field4 = i;
-    }
 }

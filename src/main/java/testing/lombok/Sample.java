@@ -24,7 +24,7 @@ import static testing.lombok.Sample.DataTools.createName;
 public class Sample {
 
     public static void main(String ... args) throws IOException {
-        val sample = new SamplePojo("first value", "second value", "third value", 4);
+        SamplePojo sample = new SamplePojo("first value", "second value", "third value", 4);
         System.out.println(String.format("Printing the toString for the pojo %s", sample));
         testNotNull(new SamplePojo());
         try {
