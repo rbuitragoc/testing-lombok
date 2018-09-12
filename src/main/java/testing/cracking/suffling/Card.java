@@ -10,6 +10,6 @@ public class Card {
   Rank rank;
   @Override
   public String toString() {
-    return String.format("%s(%s)", rank, suit);
+    return String.format("%s(%s)", rank.getFace(), suit.getSymbol());
   }
 }

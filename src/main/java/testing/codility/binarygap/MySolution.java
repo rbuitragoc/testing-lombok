@@ -39,14 +39,12 @@ public class MySolution {
     private static String toBinary(int n) {
         int  bin[] = new int[100];
         int i = 0;
-        while(n > 0)
-        {
+        while (n > 0) {
             bin[i++] = n % 2;
             n = n / 2;
         }
         StringBuilder buf = new StringBuilder();
-        for(int j = i - 1; j >= 0; j--)
-        {
+        for (int j = i - 1; j >= 0; j--) {
             buf.append(bin[j]);
         }
         return buf.toString();
